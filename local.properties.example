@@ -1,0 +1,14 @@
+# Copy to local.properties and fill in. local.properties is git-ignored.
+# Android SDK location on your machine:
+sdk.dir=/Users/you/Library/Android/sdk
+
+# Anthropic API key for the in-app coach (optional; without it, the coach runs
+# in offline stub mode).
+ANTHROPIC_API_KEY=
+
+# Strava OAuth credentials. Create an app at https://www.strava.com/settings/api
+# and use the client id + secret. The redirect URI must match the manifest
+# intent-filter scheme/host: ontrack://strava/callback
+STRAVA_CLIENT_ID=
+STRAVA_CLIENT_SECRET=
+STRAVA_REDIRECT_URI=ontrack://strava/callback
