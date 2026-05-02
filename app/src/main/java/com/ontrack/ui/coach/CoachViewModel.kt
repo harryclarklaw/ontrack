@@ -5,21 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.ontrack.data.model.CoachMessage
 import com.ontrack.data.model.CoachRole
 import com.ontrack.data.repository.CoachRepository
-import com.ontrack.data.repository.GoalRepository
-import com.ontrack.data.repository.SessionRepository
 import com.ontrack.integrations.ai.CoachService
-import com.ontrack.util.Dates
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
-import kotlinx.datetime.DatePeriod
-import kotlinx.datetime.plus
 import javax.inject.Inject
 
 data class CoachUi(
@@ -30,8 +24,6 @@ data class CoachUi(
 @HiltViewModel
 class CoachViewModel @Inject constructor(
     private val coachRepo: CoachRepository,
-    private val sessionRepo: SessionRepository,
-    private val goalRepo: GoalRepository,
     private val coachService: CoachService,
 ) : ViewModel() {
 
@@ -52,13 +44,9 @@ class CoachViewModel @Inject constructor(
             val now = Clock.System.now()
             coachRepo.add(CoachMessage(role = CoachRole.USER, content = text, createdAt = now))
             sending.value = true
-            val history = coachRepo.all()
-            val weekStart = Dates.startOfWeek(Dates.today())
-            val plan = sessionRepo.observeWeek(weekStart).first() +
-                sessionRepo.observeWeek(weekStart.plus(DatePeriod(days = 7))).first()
-            val goals = goalRepo.observeGoals().first()
+            val history = coachRepo.all().dropLast(1)
             val reply = runCatching {
-                coachService.reply(text, history, plan, goals)
+                coachService.reply(text, history)
             }.getOrElse {
                 CoachMessage(
                     role = CoachRole.ASSISTANT,

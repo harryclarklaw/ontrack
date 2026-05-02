@@ -21,6 +21,11 @@ class SessionRepository @Inject constructor(
         sessionDao.observeRange(weekStart, weekStart.plus(DatePeriod(days = 6)))
             .map { it.map(SessionEntity::toDomain) }
 
+    suspend fun observeWeekOnce(weekStart: LocalDate): List<Session> =
+        sessionDao.observeRange(weekStart, weekStart.plus(DatePeriod(days = 6)))
+            .first()
+            .map(SessionEntity::toDomain)
+
     fun observeForDate(date: LocalDate): Flow<List<Session>> =
         sessionDao.observeForDate(date).map { it.map(SessionEntity::toDomain) }
 
