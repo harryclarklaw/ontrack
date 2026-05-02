@@ -1,22 +1,33 @@
 # OnTrack
 
-A personal-development planner for Android, inspired by Runna. Tracks running,
-bouldering, martial arts, study sessions (Claude Code, AIGP), and professional
-reading on a single weekly plan, with an AI coach that holistically reviews
-progress and reschedules sessions when life gets in the way.
+A personal-development planner inspired by Runna. Tracks running,
+bouldering, martial arts, study sessions (Claude Code, AIGP), and
+professional reading on a single weekly plan, with an AI coach that
+reviews progress holistically and reschedules sessions when life gets
+in the way.
 
-## Features (v0.1 MVP)
+The repo contains three components:
 
-- **Weekly plan view** — Mon–Sun layout with the user's actual rhythm seeded:
-  martial arts Mon evening, runs Tue/Thu/Sat, climbing Fri/Sun, study weekday
-  evenings, Claude Code/AI weekend afternoons, daily professional reading.
-- **Today** — quick view of today's sessions; tick off / skip in one tap.
+- **`app/`** — Android client (Kotlin + Jetpack Compose).
+- **`supabase/`** — SQL schema for the shared backend.
+- **`mcp-server/`** — Model Context Protocol server so you can drive the
+  plan from Claude Code (or any MCP client) via natural-language chat.
+
+## Features (v0.2)
+
+- **Weekly plan view** — Mon–Sun layout with the user's actual rhythm
+  seeded: martial arts Mon evening, runs Tue/Thu/Sat, climbing Fri/Sun,
+  study weekday evenings, Claude Code/AI weekend afternoons, daily
+  professional reading.
+- **Today** — today's sessions; tick off / skip in one tap.
 - **Goals** — long-term goals (10K time, V-grade, AIGP cert, Claude Code
   projects) with target dates and metrics.
-- **AI coach** — chat-style coach (Claude API) that sees your active goals and
-  upcoming plan, can swap sessions, and enforces constraints (no back-to-back
-  hard runs, Monday martial arts is fixed, etc.).
-- **Strava sync** — OAuth flow + recent-activity import; auto-marks planned
+- **In-app AI coach (tool-driven)** — chat that *acts*. Anthropic Messages
+  API with a tool-call loop: model calls `get_plan`, `swap_sessions`,
+  `reschedule_session`, etc. and the app applies edits to Room directly.
+- **MCP server** — same set of tools, exposed over stdio. Wire it into
+  Claude Code and update the plan from your laptop.
+- **Strava sync** — OAuth + recent-activity import; auto-marks planned
   runs complete and stores actual distance/pace/HR.
 
 ## Stack
@@ -95,32 +106,39 @@ before mutating, and to keep Monday martial arts fixed.
 
 ## Driving the plan from Claude Code
 
-To chat to the planner from a laptop (e.g. this Claude Code session), the
-plan needs to live somewhere both the phone and the laptop can reach.
-Three options, ranked by effort:
+The MCP server in `mcp-server/` exposes the same tool set as the in-app
+coach over stdio. Wire it into your Claude Code config and you can chat
+your plan into shape from your laptop:
 
-1. **MCP server + shared backend (recommended).** Move the source of truth to
-   a small backend (Postgres on Supabase / Neon, or Cloudflare D1). The
-   Android app reads/writes via REST. A small Node/Python/Kotlin process
-   exposes the same operations as a Model Context Protocol server. Add it to
-   `~/.claude.json` — Claude Code calls `complete_session`, `swap_sessions`,
-   etc. directly. The tool definitions in `CoachTools.kt` map 1:1 to the
-   MCP tool list, so most of the work is already done.
-2. **On-device HTTP server.** Embed Ktor in the app and bind to local
-   network when the app is open. Claude Code on the same wifi hits
-   `http://phone-ip:8080/sessions`. No backend, but only works while the
-   app is foregrounded and devices are on the same network.
-3. **Sync file in cloud storage.** Export plan + goals to a JSON file in
-   Drive / iCloud. Both clients edit the file. Simplest but consistency
-   becomes a problem with concurrent edits.
+> Seed my OnTrack default plan.
+> Show me this week.
+> I'm wrecked — swap Thursday's tempo for an easy run.
 
-Option 1 is the right long-term shape. The backend swap is the first move;
-the MCP server is then \~200 lines.
+Setup is two steps: run the SQL in `supabase/migrations/0001_init.sql`
+against a fresh Supabase project, then `npm install && npm run build` in
+`mcp-server/` and add the entry to `~/.claude.json`. Full instructions in
+`mcp-server/README.md` and `supabase/README.md`.
+
+The MCP tool list mirrors the Android `CoachTools.kt` 1:1, so the in-app
+coach and Claude Code edits the same shape of data.
+
+### Phase B (next): Android ↔ Supabase sync
+
+This commit lands the backend + MCP server. Phase B will switch the
+Android client from local-Room-only to remote-first against Supabase, so
+edits made via Claude Code show up on the phone (and vice versa). Plan:
+
+- Authenticate the app against Supabase (email/password to start)
+- Push local mutations to Supabase as they happen
+- Pull on app open and on a manual sync, merging by id
+- Keep Room as the offline cache
+
+Until Phase B lands, the Android app continues to use its local Room
+database; MCP-driven changes live in Supabase only.
 
 ## Roadmap
 
-- **Backend + MCP server** (see above) so the plan is editable from any
-  Claude Code session.
+- **Phase B Android sync** (see above).
 - **Drag-and-drop swap** between days in the Plan view.
 - **Goal-driven plan generation** — target race / cert date drives weekly
   progression (run mileage build, climbing project cycles, AIGP modules).

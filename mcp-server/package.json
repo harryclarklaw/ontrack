@@ -1,0 +1,29 @@
+{
+  "name": "ontrack-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for OnTrack — drive the planner via natural-language chat from any MCP client (Claude Code, etc.)",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "ontrack-mcp": "dist/index.js"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "@supabase/supabase-js": "^2.46.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
