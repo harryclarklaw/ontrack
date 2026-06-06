@@ -1,0 +1,138 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "example-mixed-app",
+  "documentNamespace": "https://example.com/spdx/example-mixed-app-1.0.0",
+  "creationInfo": {
+    "created": "2026-01-01T00:00:00Z",
+    "creators": ["Tool: example-generator-1.0"]
+  },
+  "hasExtractedLicensingInfos": [
+    {
+      "licenseId": "LicenseRef-CustomCorp",
+      "name": "CustomCorp Commercial License 1.0",
+      "extractedText": "CustomCorp Commercial License 1.0. Redistribution permitted to licensees only. Contact licensing@customcorp.example for terms."
+    }
+  ],
+  "packages": [
+    {
+      "name": "fast-json",
+      "SPDXID": "SPDXRef-Package-fast-json",
+      "versionInfo": "2.4.0",
+      "supplier": "Organization: FastJSON Project",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "MIT",
+      "copyrightText": "Copyright (c) 2021 FastJSON Project",
+      "externalRefs": [
+        {
+          "referenceCategory": "PACKAGE-MANAGER",
+          "referenceType": "purl",
+          "referenceLocator": "pkg:cargo/fast-json@2.4.0"
+        }
+      ]
+    },
+    {
+      "name": "dual-licensed-lib",
+      "SPDXID": "SPDXRef-Package-dual",
+      "versionInfo": "0.9.1",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "MIT OR Apache-2.0",
+      "licenseDeclared": "MIT OR Apache-2.0",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "jdk-helper",
+      "SPDXID": "SPDXRef-Package-jdk-helper",
+      "versionInfo": "3.1.0",
+      "supplier": "Organization: JDK Helper Authors",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "licenseDeclared": "GPL-2.0-only WITH Classpath-exception-2.0",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "weak-copyleft-widget",
+      "SPDXID": "SPDXRef-Package-lgpl",
+      "versionInfo": "5.2.0",
+      "supplier": "Organization: Widget Co",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "LGPL-2.1-or-later",
+      "licenseDeclared": "LGPL-2.1-or-later",
+      "copyrightText": "Copyright (c) 2019 Widget Co"
+    },
+    {
+      "name": "mozilla-thing",
+      "SPDXID": "SPDXRef-Package-mpl",
+      "versionInfo": "1.4.2",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "MPL-2.0",
+      "licenseDeclared": "MPL-2.0",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "copyleft-engine",
+      "SPDXID": "SPDXRef-Package-gpl3",
+      "versionInfo": "7.0.0",
+      "supplier": "Organization: Engine Project",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "GPL-3.0-only",
+      "licenseDeclared": "GPL-3.0-only",
+      "copyrightText": "Copyright (c) 2020 Engine Project"
+    },
+    {
+      "name": "network-service-lib",
+      "SPDXID": "SPDXRef-Package-agpl",
+      "versionInfo": "2.0.0",
+      "supplier": "Organization: Netservice",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "AGPL-3.0-only",
+      "licenseDeclared": "AGPL-3.0-only",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "customcorp-sdk",
+      "SPDXID": "SPDXRef-Package-customcorp",
+      "versionInfo": "1.0.0",
+      "supplier": "Organization: CustomCorp",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "LicenseRef-CustomCorp",
+      "licenseDeclared": "LicenseRef-CustomCorp",
+      "copyrightText": "Copyright (c) 2023 CustomCorp"
+    },
+    {
+      "name": "mystery-package",
+      "SPDXID": "SPDXRef-Package-mystery",
+      "versionInfo": "0.1.0",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "unlicensed-snippet",
+      "SPDXID": "SPDXRef-Package-nolicense",
+      "versionInfo": "0.0.3",
+      "downloadLocation": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "name": "build-only-gpl-tool",
+      "SPDXID": "SPDXRef-Package-buildtool",
+      "versionInfo": "4.4.0",
+      "supplier": "Organization: Build Tooling Inc",
+      "downloadLocation": "NOASSERTION",
+      "licenseConcluded": "GPL-3.0-or-later",
+      "licenseDeclared": "GPL-3.0-or-later",
+      "copyrightText": "Copyright (c) 2018 Build Tooling Inc"
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-DOCUMENT",
+      "relationshipType": "DESCRIBES",
+      "relatedSpdxElement": "SPDXRef-Package-fast-json"
+    }
+  ]
+}

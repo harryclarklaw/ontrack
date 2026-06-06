@@ -1,0 +1,87 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:8f3a2b10-0000-4000-a000-000000000001",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-01-01T00:00:00Z",
+    "component": {
+      "type": "application",
+      "name": "example-clean-app",
+      "version": "1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:cargo/serde@1.0.197",
+      "name": "serde",
+      "version": "1.0.197",
+      "purl": "pkg:cargo/serde@1.0.197",
+      "supplier": { "name": "serde authors" },
+      "licenses": [
+        { "expression": "MIT OR Apache-2.0" }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/lodash@4.17.21",
+      "name": "lodash",
+      "version": "4.17.21",
+      "purl": "pkg:npm/lodash@4.17.21",
+      "supplier": { "name": "OpenJS Foundation" },
+      "licenses": [
+        { "license": { "id": "MIT" } }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:cargo/log@0.4.21",
+      "name": "log",
+      "version": "0.4.21",
+      "purl": "pkg:cargo/log@0.4.21",
+      "licenses": [
+        { "expression": "MIT OR Apache-2.0" }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:pypi/requests@2.31.0",
+      "name": "requests",
+      "version": "2.31.0",
+      "purl": "pkg:pypi/requests@2.31.0",
+      "supplier": { "name": "Kenneth Reitz" },
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0",
+            "text": {
+              "contentType": "text/plain",
+              "content": "Apache License 2.0 - see https://www.apache.org/licenses/LICENSE-2.0 . NOTICE: Requests Copyright the Python Software Foundation and contributors."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/inherits@2.0.4",
+      "name": "inherits",
+      "version": "2.0.4",
+      "purl": "pkg:npm/inherits@2.0.4",
+      "licenses": [
+        { "license": { "id": "ISC" } }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:cargo/adler@1.0.2",
+      "name": "adler",
+      "version": "1.0.2",
+      "purl": "pkg:cargo/adler@1.0.2",
+      "licenses": [
+        { "license": { "id": "BSD-3-Clause" } }
+      ]
+    }
+  ]
+}

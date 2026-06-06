@@ -1,0 +1,14 @@
+exceptions:
+  - component: build-only-gpl-tool
+    version: "4.4.0"
+    posture: allowed
+    justification: >-
+      Used only as a build-time code generator. Its output is not derived from
+      the tool and the tool binary is not distributed with the product.
+    owner: gc@example.com
+    date: "2026-05-01"
+  - component: copyleft-engine
+    posture: review
+    justification: Isolated in a separate process invoked over IPC; counsel reviewing boundary.
+    owner: gc@example.com
+    date: "2026-05-02"

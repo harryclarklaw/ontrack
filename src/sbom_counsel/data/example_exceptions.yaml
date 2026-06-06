@@ -1,0 +1,19 @@
+# Example project exceptions for the mixed example SBOM.
+#
+# An exception overrides the computed posture for a specific component. Every
+# exception must carry a justification, an owner and a date; an exception without
+# a justification is rejected. Applied exceptions appear in the report with their
+# justification, so the override is always auditable.
+#
+# version is optional: omit it to match any version of the component.
+
+exceptions:
+  - component: build-only-gpl-tool
+    version: "4.4.0"
+    posture: allowed
+    justification: >-
+      Used only as a build-time code generator. Its output is not a derivative of
+      the tool, and the GPL tool binary is not distributed with the product, so the
+      copyleft obligation is not triggered for the shipped artefact.
+    owner: general.counsel@example.com
+    date: "2026-05-01"

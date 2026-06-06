@@ -1,0 +1,243 @@
+# sbom-counsel default licence policy
+#
+# IMPORTANT — READ BEFORE RELYING ON THIS FILE
+# These are conservative DEFAULT classifications intended as a starting point.
+# They are not legal advice and they are not tuned to your product, your
+# distribution model, or your jurisdiction. They must be reviewed and adjusted
+# by qualified legal counsel before you rely on them for any release decision.
+#
+# This file is the control surface for the whole tool. A lawyer can edit it
+# without touching any source code. Every classification the tool produces records
+# the rule id from this file that produced it, so each result is auditable.
+#
+# Posture is assessed for ONE scenario: shipping the component inside a
+# proprietary, commercially distributed product (a closed-source binary that is
+# conveyed to third parties). Postures are one of:
+#   allowed  - acceptable for that scenario under this policy
+#   review   - a human must read the terms and the usage before shipping
+#   blocked  - not acceptable under this policy without a recorded exception
+#
+# How a component is evaluated:
+#   * Its SPDX licence expression is parsed.
+#   * For an OR (dual-licensing) the LEAST restrictive branch governs, because the
+#     distributor may elect that licence. Setting `multi_license_or: worst` makes
+#     this stricter.
+#   * For an AND every licence's obligations apply, so the MOST restrictive branch
+#     governs.
+#   * A licence id is matched against `licenses` first, then `license_patterns`.
+#   * An unmatched (non-SPDX or unknown) id uses `defaults.unknown_posture`.
+#   * NOASSERTION / no licence uses `defaults.unresolved_posture`.
+
+meta:
+  name: "sbom-counsel default policy (conservative starting point)"
+  policy_version: "0.1.0"
+  scenario: "Proprietary, commercially distributed product (closed-source, conveyed to third parties)."
+
+settings:
+  # How to combine the branches of a dual/multi licence.
+  multi_license_or: best     # best = least restrictive branch governs; worst = most restrictive
+  multi_license_and: worst   # almost always 'worst'; every licence's terms apply
+
+defaults:
+  # Applied when a licence cannot be resolved at all (NOASSERTION / none found).
+  # Set to 'blocked' for a stricter posture that fails the build on any unknown.
+  unresolved_posture: review
+  # Applied to a syntactically valid but non-SPDX / unrecognised identifier.
+  unknown_posture: review
+
+categories:
+  permissive:
+    description: >-
+      Permissive licences that allow use in a proprietary product subject to
+      retaining notices and attribution.
+    posture: allowed
+    obligations:
+      - "Retain copyright notices and licence text for the component."
+      - "Reproduce attribution in your product's third-party notices."
+
+  permissive-apache:
+    description: >-
+      Apache-2.0 style permissive licence with an explicit patent grant and a
+      NOTICE-file requirement.
+    posture: allowed
+    obligations:
+      - "Retain copyright, licence and NOTICE text; preserve any NOTICE file contents."
+      - "Reproduce attribution in your product's third-party notices."
+      - "Note the express patent grant and its defensive-termination clause."
+
+  public-domain:
+    description: "Public-domain dedications and equivalents with minimal or no obligations."
+    posture: allowed
+    obligations:
+      - "No material obligation; retaining the dedication text is good practice."
+
+  weak-copyleft:
+    description: >-
+      File-level or library-level copyleft. Obligations typically attach to the
+      licensed files or to the library, and depend on how it is linked.
+    posture: review
+    obligations:
+      - "Assess linkage: dynamic vs static linking changes the obligations."
+      - "Provide the ability to relink or replace the library where the licence requires it (e.g. LGPL)."
+      - "Make modifications to the covered files available where required (e.g. MPL-2.0, EPL-2.0)."
+      - "Retain notices and provide the covered source for the component."
+
+  strong-copyleft:
+    description: >-
+      Reciprocal copyleft that typically extends to the combined/derived work.
+      Combining with and conveying a proprietary binary commonly triggers a
+      source-disclosure obligation for the whole combined work.
+    posture: blocked
+    obligations:
+      - "Conveying a proprietary binary that incorporates this component typically requires releasing the combined work's source under the same licence."
+      - "Do not ship unless the component is fully isolated (e.g. separate process) and counsel has confirmed no derivative-work combination, or an exception is recorded."
+
+  network-copyleft:
+    description: >-
+      Network/Affero copyleft. Source-disclosure can be triggered by interaction
+      over a network, not only by distribution of a binary. Especially relevant
+      to game servers and other hosted backends.
+    posture: blocked
+    obligations:
+      - "Providing network access to a modified version typically requires offering the corresponding source to those users."
+      - "Do not ship or operate as part of a proprietary service without counsel's confirmation, or a recorded exception."
+
+  noncommercial:
+    description: "Licences that forbid commercial use."
+    posture: blocked
+    obligations:
+      - "Commercial distribution is not permitted under this licence; remove or replace the component."
+
+  share-alike-content:
+    description: >-
+      Share-alike content licences (e.g. CC-BY-SA). Aimed at media/content rather
+      than code; the share-alike term can extend to adaptations.
+    posture: review
+    obligations:
+      - "Provide attribution as specified."
+      - "Assess whether your use creates an adaptation that must be licensed alike."
+
+  proprietary-commercial:
+    description: "Proprietary, commercial, or custom terms that must be read by a human."
+    posture: review
+    obligations:
+      - "Read the actual terms; confirm a distribution/redistribution grant covers your use."
+      - "Confirm any per-seat, field-of-use, or royalty conditions."
+
+  unknown:
+    description: "A syntactically valid but unrecognised or non-SPDX identifier."
+    posture: review
+    obligations:
+      - "Identify the actual licence and re-run, or add it to the policy."
+
+  unresolved:
+    description: "No usable licence information was found (NOASSERTION or absent)."
+    posture: review
+    obligations:
+      - "Determine the component's licence from upstream and record it; treat as blocked until known."
+
+# SPDX exception ids (the part after WITH). An exception can soften or harden the
+# base licence's posture and attach a note.
+exception_overrides:
+  Classpath-exception-2.0:
+    posture: review
+    category: weak-copyleft
+    note: >-
+      The GNU Classpath exception generally permits linking the library into an
+      independent work without the linked work becoming subject to the GPL.
+      Confirm the linking scenario with counsel; the base licence still governs
+      modifications to the component itself.
+  GCC-exception-3.1:
+    posture: review
+    category: weak-copyleft
+    note: "Runtime library exception; confirm it covers your linkage scenario."
+  LLVM-exception:
+    posture: allowed
+    category: permissive
+    note: "Apache-2.0 WITH LLVM-exception is treated as permissive for distribution."
+
+# Exact SPDX licence id -> category. Matched before patterns.
+licenses:
+  # Permissive
+  MIT: permissive
+  MIT-0: permissive
+  X11: permissive
+  ISC: permissive
+  BSD-2-Clause: permissive
+  BSD-3-Clause: permissive
+  BSD-3-Clause-Clear: permissive
+  0BSD: permissive
+  Zlib: permissive
+  libpng-2.0: permissive
+  BSL-1.0: permissive
+  PostgreSQL: permissive
+  NCSA: permissive
+  Python-2.0: permissive
+  Apache-1.1: permissive
+  # Apache-2.0 (notice + patent)
+  Apache-2.0: permissive-apache
+  # Public domain / equivalents
+  CC0-1.0: public-domain
+  Unlicense: public-domain
+  WTFPL: public-domain
+  blessing: public-domain
+  # Weak copyleft
+  LGPL-2.0-only: weak-copyleft
+  LGPL-2.0-or-later: weak-copyleft
+  LGPL-2.1-only: weak-copyleft
+  LGPL-2.1-or-later: weak-copyleft
+  LGPL-3.0-only: weak-copyleft
+  LGPL-3.0-or-later: weak-copyleft
+  MPL-1.1: weak-copyleft
+  MPL-2.0: weak-copyleft
+  EPL-1.0: weak-copyleft
+  EPL-2.0: weak-copyleft
+  CDDL-1.0: weak-copyleft
+  CDDL-1.1: weak-copyleft
+  CPL-1.0: weak-copyleft
+  EUPL-1.1: weak-copyleft
+  EUPL-1.2: weak-copyleft
+  Artistic-2.0: weak-copyleft
+  # Strong copyleft
+  GPL-2.0-only: strong-copyleft
+  GPL-2.0-or-later: strong-copyleft
+  GPL-3.0-only: strong-copyleft
+  GPL-3.0-or-later: strong-copyleft
+  # Network copyleft
+  AGPL-3.0-only: network-copyleft
+  AGPL-3.0-or-later: network-copyleft
+  # Share-alike content
+  CC-BY-SA-3.0: share-alike-content
+  CC-BY-SA-4.0: share-alike-content
+  # Non-commercial
+  CC-BY-NC-3.0: noncommercial
+  CC-BY-NC-4.0: noncommercial
+  CC-BY-NC-SA-3.0: noncommercial
+  CC-BY-NC-SA-4.0: noncommercial
+  CC-BY-NC-ND-3.0: noncommercial
+  CC-BY-NC-ND-4.0: noncommercial
+  # Permissive content (attribution only)
+  CC-BY-3.0: permissive
+  CC-BY-4.0: permissive
+
+# Ordered fallback rules matched by prefix when an id is not in `licenses`.
+# The first matching rule wins. Each carries an id used in the audit trail.
+license_patterns:
+  - id: agpl-family
+    prefix: "AGPL-"
+    category: network-copyleft
+  - id: gpl-family
+    prefix: "GPL-"
+    category: strong-copyleft
+  - id: lgpl-family
+    prefix: "LGPL-"
+    category: weak-copyleft
+  - id: cc-by-nc-family
+    prefix: "CC-BY-NC"
+    category: noncommercial
+  - id: cc-by-sa-family
+    prefix: "CC-BY-SA"
+    category: share-alike-content
+  - id: license-ref-family
+    prefix: "LicenseRef-"
+    category: proprietary-commercial
