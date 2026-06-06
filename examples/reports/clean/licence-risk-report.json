@@ -1,0 +1,278 @@
+{
+  "schema": "sbom-counsel/report/v1",
+  "tool": {
+    "name": "sbom-counsel",
+    "version": "0.1.0"
+  },
+  "generated_at": "2026-06-06",
+  "source": {
+    "path": "examples/clean.cdx.json",
+    "format": "CycloneDX"
+  },
+  "policy": {
+    "name": "sbom-counsel default policy (conservative starting point)",
+    "path": "/home/user/ontrack/src/sbom_counsel/data/default_policy.yaml"
+  },
+  "exceptions_file": null,
+  "summary": {
+    "overall_posture": "allowed",
+    "counts": {
+      "blocked": 0,
+      "review": 0,
+      "allowed": 6,
+      "total": 6
+    }
+  },
+  "components": [
+    {
+      "name": "adler",
+      "version": "1.0.2",
+      "supplier": null,
+      "purl": "pkg:cargo/adler@1.0.2",
+      "posture": "allowed",
+      "category": "permissive",
+      "rule_applied": "licenses:BSD-3-Clause",
+      "explanation": "Licence expression 'BSD-3-Clause' resolved to posture 'allowed'. Governing rule(s): permissive via licenses:BSD-3-Clause.",
+      "licence": {
+        "raw": "BSD-3-Clause",
+        "source_field": "declared",
+        "expression": "BSD-3-Clause",
+        "license_ids": [
+          "BSD-3-Clause"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Retain copyright notices and licence text for the component.",
+        "Reproduce attribution in your product's third-party notices."
+      ],
+      "findings": [
+        {
+          "license_id": "BSD-3-Clause",
+          "category": "permissive",
+          "posture": "allowed",
+          "rule_id": "licenses:BSD-3-Clause"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "inherits",
+      "version": "2.0.4",
+      "supplier": null,
+      "purl": "pkg:npm/inherits@2.0.4",
+      "posture": "allowed",
+      "category": "permissive",
+      "rule_applied": "licenses:ISC",
+      "explanation": "Licence expression 'ISC' resolved to posture 'allowed'. Governing rule(s): permissive via licenses:ISC.",
+      "licence": {
+        "raw": "ISC",
+        "source_field": "declared",
+        "expression": "ISC",
+        "license_ids": [
+          "ISC"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Retain copyright notices and licence text for the component.",
+        "Reproduce attribution in your product's third-party notices."
+      ],
+      "findings": [
+        {
+          "license_id": "ISC",
+          "category": "permissive",
+          "posture": "allowed",
+          "rule_id": "licenses:ISC"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "lodash",
+      "version": "4.17.21",
+      "supplier": "OpenJS Foundation",
+      "purl": "pkg:npm/lodash@4.17.21",
+      "posture": "allowed",
+      "category": "permissive",
+      "rule_applied": "licenses:MIT",
+      "explanation": "Licence expression 'MIT' resolved to posture 'allowed'. Governing rule(s): permissive via licenses:MIT.",
+      "licence": {
+        "raw": "MIT",
+        "source_field": "declared",
+        "expression": "MIT",
+        "license_ids": [
+          "MIT"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Retain copyright notices and licence text for the component.",
+        "Reproduce attribution in your product's third-party notices."
+      ],
+      "findings": [
+        {
+          "license_id": "MIT",
+          "category": "permissive",
+          "posture": "allowed",
+          "rule_id": "licenses:MIT"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "log",
+      "version": "0.4.21",
+      "supplier": null,
+      "purl": "pkg:cargo/log@0.4.21",
+      "posture": "allowed",
+      "category": "permissive",
+      "rule_applied": "licenses:MIT",
+      "explanation": "Licence expression 'MIT OR Apache-2.0' resolved to posture 'allowed'. Governing rule(s): permissive via licenses:MIT. OR resolved to the least restrictive branch.",
+      "licence": {
+        "raw": "MIT OR Apache-2.0",
+        "source_field": "declared",
+        "expression": "MIT OR Apache-2.0",
+        "license_ids": [
+          "Apache-2.0",
+          "MIT"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Retain copyright notices and licence text for the component.",
+        "Reproduce attribution in your product's third-party notices."
+      ],
+      "findings": [
+        {
+          "license_id": "MIT",
+          "category": "permissive",
+          "posture": "allowed",
+          "rule_id": "licenses:MIT"
+        },
+        {
+          "license_id": "Apache-2.0",
+          "category": "permissive-apache",
+          "posture": "allowed",
+          "rule_id": "licenses:Apache-2.0"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "requests",
+      "version": "2.31.0",
+      "supplier": "Kenneth Reitz",
+      "purl": "pkg:pypi/requests@2.31.0",
+      "posture": "allowed",
+      "category": "permissive-apache",
+      "rule_applied": "licenses:Apache-2.0",
+      "explanation": "Licence expression 'Apache-2.0' resolved to posture 'allowed'. Governing rule(s): permissive-apache via licenses:Apache-2.0.",
+      "licence": {
+        "raw": "Apache-2.0",
+        "source_field": "declared",
+        "expression": "Apache-2.0",
+        "license_ids": [
+          "Apache-2.0"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Retain copyright, licence and NOTICE text; preserve any NOTICE file contents.",
+        "Reproduce attribution in your product's third-party notices.",
+        "Note the express patent grant and its defensive-termination clause."
+      ],
+      "findings": [
+        {
+          "license_id": "Apache-2.0",
+          "category": "permissive-apache",
+          "posture": "allowed",
+          "rule_id": "licenses:Apache-2.0"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "serde",
+      "version": "1.0.197",
+      "supplier": "serde authors",
+      "purl": "pkg:cargo/serde@1.0.197",
+      "posture": "allowed",
+      "category": "permissive",
+      "rule_applied": "licenses:MIT",
+      "explanation": "Licence expression 'MIT OR Apache-2.0' resolved to posture 'allowed'. Governing rule(s): permissive via licenses:MIT. OR resolved to the least restrictive branch.",
+      "licence": {
+        "raw": "MIT OR Apache-2.0",
+        "source_field": "declared",
+        "expression": "MIT OR Apache-2.0",
+        "license_ids": [
+          "Apache-2.0",
+          "MIT"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Retain copyright notices and licence text for the component.",
+        "Reproduce attribution in your product's third-party notices."
+      ],
+      "findings": [
+        {
+          "license_id": "MIT",
+          "category": "permissive",
+          "posture": "allowed",
+          "rule_id": "licenses:MIT"
+        },
+        {
+          "license_id": "Apache-2.0",
+          "category": "permissive-apache",
+          "posture": "allowed",
+          "rule_id": "licenses:Apache-2.0"
+        }
+      ],
+      "unresolved": false
+    }
+  ],
+  "unresolved": [],
+  "obligations": [
+    "Retain copyright notices and licence text for the component.",
+    "Reproduce attribution in your product's third-party notices.",
+    "Retain copyright, licence and NOTICE text; preserve any NOTICE file contents.",
+    "Note the express patent grant and its defensive-termination clause."
+  ],
+  "exceptions_applied": [],
+  "notes": [],
+  "methodology": [
+    "Each component's licence is read from the SBOM. The concluded licence is preferred over the declared licence where both are present.",
+    "Licence strings are parsed as SPDX expressions, including AND, OR and WITH operators, using the SPDX licence list.",
+    "Each licence is mapped to a category and a ship-posture by the policy file. For a dual (OR) licence the least restrictive branch governs by default, because the distributor may elect it; for an AND every licence applies and the most restrictive governs.",
+    "Licences that are NOASSERTION, absent, or not recognised are never treated as acceptable by default. They are surfaced as unresolved or unknown and given the policy's conservative default posture.",
+    "Project exceptions, where supplied, are applied after classification and are listed with their justification, owner and date.",
+    "Every result records the policy rule that produced it, so each classification can be audited."
+  ],
+  "limitations": [
+    "This tool does not perform static or dynamic linkage analysis. Weak-copyleft obligations (for example LGPL or MPL) depend on how a component is linked, which must be assessed by a human.",
+    "It classifies licences; it does not read the full licence text or detect additional terms embedded in a component.",
+    "It is not a vulnerability scanner. Where the SBOM already contains vulnerability data it is surfaced for information only.",
+    "It does not assert compliance with the EU Cyber Resilience Act or any other regulation, and is not a certification. It is a readiness and analysis aid.",
+    "Its conclusions are only as good as the SBOM it is given. Components missing from the SBOM are invisible to it."
+  ],
+  "disclaimer": "This report is generated by automated tooling. It is not legal advice and does not create a lawyer-client relationship. The classifications are indicative only: they are produced by applying a configurable policy to the licence identifiers found in the supplied SBOM. They depend entirely on the policy in force and on the completeness and accuracy of that SBOM. They do not account for how each component is actually used, combined, linked or distributed in your product, and they do not constitute a determination that any component may or may not be shipped. Before making any distribution decision, the findings here must be reviewed by qualified legal counsel."
+}

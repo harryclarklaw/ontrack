@@ -1,0 +1,470 @@
+{
+  "schema": "sbom-counsel/report/v1",
+  "tool": {
+    "name": "sbom-counsel",
+    "version": "0.1.0"
+  },
+  "generated_at": "2026-06-06",
+  "source": {
+    "path": "examples/mixed.spdx.json",
+    "format": "SPDX"
+  },
+  "policy": {
+    "name": "sbom-counsel default policy (conservative starting point)",
+    "path": "/home/user/ontrack/src/sbom_counsel/data/default_policy.yaml"
+  },
+  "exceptions_file": "examples/exceptions.yaml",
+  "summary": {
+    "overall_posture": "blocked",
+    "counts": {
+      "blocked": 2,
+      "review": 6,
+      "allowed": 3,
+      "total": 11
+    }
+  },
+  "components": [
+    {
+      "name": "copyleft-engine",
+      "version": "7.0.0",
+      "supplier": "Engine Project",
+      "purl": null,
+      "posture": "blocked",
+      "category": "strong-copyleft",
+      "rule_applied": "licenses:GPL-3.0-only",
+      "explanation": "Licence expression 'GPL-3.0-only' resolved to posture 'blocked'. Governing rule(s): strong-copyleft via licenses:GPL-3.0-only.",
+      "licence": {
+        "raw": "GPL-3.0-only",
+        "source_field": "concluded",
+        "expression": "GPL-3.0-only",
+        "license_ids": [
+          "GPL-3.0-only"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Conveying a proprietary binary that incorporates this component typically requires releasing the combined work's source under the same licence.",
+        "Do not ship unless the component is fully isolated (e.g. separate process) and counsel has confirmed no derivative-work combination, or an exception is recorded."
+      ],
+      "findings": [
+        {
+          "license_id": "GPL-3.0-only",
+          "category": "strong-copyleft",
+          "posture": "blocked",
+          "rule_id": "licenses:GPL-3.0-only"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "network-service-lib",
+      "version": "2.0.0",
+      "supplier": "Netservice",
+      "purl": null,
+      "posture": "blocked",
+      "category": "network-copyleft",
+      "rule_applied": "licenses:AGPL-3.0-only",
+      "explanation": "Licence expression 'AGPL-3.0-only' resolved to posture 'blocked'. Governing rule(s): network-copyleft via licenses:AGPL-3.0-only.",
+      "licence": {
+        "raw": "AGPL-3.0-only",
+        "source_field": "concluded",
+        "expression": "AGPL-3.0-only",
+        "license_ids": [
+          "AGPL-3.0-only"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Providing network access to a modified version typically requires offering the corresponding source to those users.",
+        "Do not ship or operate as part of a proprietary service without counsel's confirmation, or a recorded exception."
+      ],
+      "findings": [
+        {
+          "license_id": "AGPL-3.0-only",
+          "category": "network-copyleft",
+          "posture": "blocked",
+          "rule_id": "licenses:AGPL-3.0-only"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "customcorp-sdk",
+      "version": "1.0.0",
+      "supplier": "CustomCorp",
+      "purl": null,
+      "posture": "review",
+      "category": "proprietary-commercial",
+      "rule_applied": "license_patterns:license-ref-family",
+      "explanation": "Licence expression 'LicenseRef-CustomCorp' resolved to posture 'review'. Governing rule(s): proprietary-commercial via license_patterns:license-ref-family.",
+      "licence": {
+        "raw": "LicenseRef-CustomCorp",
+        "source_field": "concluded",
+        "expression": "LicenseRef-CustomCorp",
+        "license_ids": [
+          "LicenseRef-CustomCorp"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [
+          "LicenseRef-CustomCorp"
+        ],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Read the actual terms; confirm a distribution/redistribution grant covers your use.",
+        "Confirm any per-seat, field-of-use, or royalty conditions."
+      ],
+      "findings": [
+        {
+          "license_id": "LicenseRef-CustomCorp",
+          "category": "proprietary-commercial",
+          "posture": "review",
+          "rule_id": "license_patterns:license-ref-family"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "jdk-helper",
+      "version": "3.1.0",
+      "supplier": "JDK Helper Authors",
+      "purl": null,
+      "posture": "review",
+      "category": "weak-copyleft",
+      "rule_applied": "exception_overrides:Classpath-exception-2.0",
+      "explanation": "Licence expression 'GPL-2.0-only WITH Classpath-exception-2.0' resolved to posture 'review'. Governing rule(s): weak-copyleft via exception_overrides:Classpath-exception-2.0. The GNU Classpath exception generally permits linking the library into an independent work without the linked work becoming subject to the GPL. Confirm the linking scenario with counsel; the base licence still governs modifications to the component itself.",
+      "licence": {
+        "raw": "GPL-2.0-only WITH Classpath-exception-2.0",
+        "source_field": "concluded",
+        "expression": "GPL-2.0-only WITH Classpath-exception-2.0",
+        "license_ids": [
+          "GPL-2.0-only"
+        ],
+        "exception_ids": [
+          "Classpath-exception-2.0"
+        ],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Assess linkage: dynamic vs static linking changes the obligations.",
+        "Provide the ability to relink or replace the library where the licence requires it (e.g. LGPL).",
+        "Make modifications to the covered files available where required (e.g. MPL-2.0, EPL-2.0).",
+        "Retain notices and provide the covered source for the component."
+      ],
+      "findings": [
+        {
+          "license_id": "GPL-2.0-only WITH Classpath-exception-2.0",
+          "category": "weak-copyleft",
+          "posture": "review",
+          "rule_id": "exception_overrides:Classpath-exception-2.0"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "mozilla-thing",
+      "version": "1.4.2",
+      "supplier": null,
+      "purl": null,
+      "posture": "review",
+      "category": "weak-copyleft",
+      "rule_applied": "licenses:MPL-2.0",
+      "explanation": "Licence expression 'MPL-2.0' resolved to posture 'review'. Governing rule(s): weak-copyleft via licenses:MPL-2.0.",
+      "licence": {
+        "raw": "MPL-2.0",
+        "source_field": "concluded",
+        "expression": "MPL-2.0",
+        "license_ids": [
+          "MPL-2.0"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Assess linkage: dynamic vs static linking changes the obligations.",
+        "Provide the ability to relink or replace the library where the licence requires it (e.g. LGPL).",
+        "Make modifications to the covered files available where required (e.g. MPL-2.0, EPL-2.0).",
+        "Retain notices and provide the covered source for the component."
+      ],
+      "findings": [
+        {
+          "license_id": "MPL-2.0",
+          "category": "weak-copyleft",
+          "posture": "review",
+          "rule_id": "licenses:MPL-2.0"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "mystery-package",
+      "version": "0.1.0",
+      "supplier": null,
+      "purl": null,
+      "posture": "review",
+      "category": "unresolved",
+      "rule_applied": "defaults:unresolved_posture",
+      "explanation": "Licence is NOASSERTION in the SBOM. Assigned the policy's conservative default for unresolved licences (review).",
+      "licence": {
+        "raw": "NOASSERTION",
+        "source_field": "concluded",
+        "expression": null,
+        "license_ids": [],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": true,
+        "unresolved_reason": "Licence is NOASSERTION in the SBOM."
+      },
+      "obligations": [
+        "Determine the component's licence from upstream and record it; treat as blocked until known."
+      ],
+      "findings": [],
+      "unresolved": true
+    },
+    {
+      "name": "unlicensed-snippet",
+      "version": "0.0.3",
+      "supplier": null,
+      "purl": null,
+      "posture": "review",
+      "category": "unresolved",
+      "rule_applied": "defaults:unresolved_posture",
+      "explanation": "No licence information was found for this component. Assigned the policy's conservative default for unresolved licences (review).",
+      "licence": {
+        "raw": null,
+        "source_field": "none",
+        "expression": null,
+        "license_ids": [],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": true,
+        "unresolved_reason": "No licence information was found for this component."
+      },
+      "obligations": [
+        "Determine the component's licence from upstream and record it; treat as blocked until known."
+      ],
+      "findings": [],
+      "unresolved": true
+    },
+    {
+      "name": "weak-copyleft-widget",
+      "version": "5.2.0",
+      "supplier": "Widget Co",
+      "purl": null,
+      "posture": "review",
+      "category": "weak-copyleft",
+      "rule_applied": "licenses:LGPL-2.1-or-later",
+      "explanation": "Licence expression 'LGPL-2.1-or-later' resolved to posture 'review'. Governing rule(s): weak-copyleft via licenses:LGPL-2.1-or-later.",
+      "licence": {
+        "raw": "LGPL-2.1-or-later",
+        "source_field": "concluded",
+        "expression": "LGPL-2.1-or-later",
+        "license_ids": [
+          "LGPL-2.1-or-later"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Assess linkage: dynamic vs static linking changes the obligations.",
+        "Provide the ability to relink or replace the library where the licence requires it (e.g. LGPL).",
+        "Make modifications to the covered files available where required (e.g. MPL-2.0, EPL-2.0).",
+        "Retain notices and provide the covered source for the component."
+      ],
+      "findings": [
+        {
+          "license_id": "LGPL-2.1-or-later",
+          "category": "weak-copyleft",
+          "posture": "review",
+          "rule_id": "licenses:LGPL-2.1-or-later"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "build-only-gpl-tool",
+      "version": "4.4.0",
+      "supplier": "Build Tooling Inc",
+      "purl": null,
+      "posture": "allowed",
+      "category": "strong-copyleft",
+      "rule_applied": "licenses:GPL-3.0-or-later",
+      "explanation": "Licence expression 'GPL-3.0-or-later' resolved to posture 'blocked'. Governing rule(s): strong-copyleft via licenses:GPL-3.0-or-later. Exception applied by general.counsel@example.com on 2026-05-01, overriding 'blocked' to 'allowed': Used only as a build-time code generator. Its output is not a derivative of the tool, and the GPL tool binary is not distributed with the product, so the copyleft obligation is not triggered for the shipped artefact.",
+      "licence": {
+        "raw": "GPL-3.0-or-later",
+        "source_field": "concluded",
+        "expression": "GPL-3.0-or-later",
+        "license_ids": [
+          "GPL-3.0-or-later"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Conveying a proprietary binary that incorporates this component typically requires releasing the combined work's source under the same licence.",
+        "Do not ship unless the component is fully isolated (e.g. separate process) and counsel has confirmed no derivative-work combination, or an exception is recorded."
+      ],
+      "findings": [
+        {
+          "license_id": "GPL-3.0-or-later",
+          "category": "strong-copyleft",
+          "posture": "blocked",
+          "rule_id": "licenses:GPL-3.0-or-later"
+        }
+      ],
+      "unresolved": false,
+      "exception": {
+        "original_posture": "blocked",
+        "override_posture": "allowed",
+        "justification": "Used only as a build-time code generator. Its output is not a derivative of the tool, and the GPL tool binary is not distributed with the product, so the copyleft obligation is not triggered for the shipped artefact.",
+        "owner": "general.counsel@example.com",
+        "date": "2026-05-01"
+      }
+    },
+    {
+      "name": "dual-licensed-lib",
+      "version": "0.9.1",
+      "supplier": null,
+      "purl": null,
+      "posture": "allowed",
+      "category": "permissive",
+      "rule_applied": "licenses:MIT",
+      "explanation": "Licence expression 'MIT OR Apache-2.0' resolved to posture 'allowed'. Governing rule(s): permissive via licenses:MIT. OR resolved to the least restrictive branch.",
+      "licence": {
+        "raw": "MIT OR Apache-2.0",
+        "source_field": "concluded",
+        "expression": "MIT OR Apache-2.0",
+        "license_ids": [
+          "Apache-2.0",
+          "MIT"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Retain copyright notices and licence text for the component.",
+        "Reproduce attribution in your product's third-party notices."
+      ],
+      "findings": [
+        {
+          "license_id": "MIT",
+          "category": "permissive",
+          "posture": "allowed",
+          "rule_id": "licenses:MIT"
+        },
+        {
+          "license_id": "Apache-2.0",
+          "category": "permissive-apache",
+          "posture": "allowed",
+          "rule_id": "licenses:Apache-2.0"
+        }
+      ],
+      "unresolved": false
+    },
+    {
+      "name": "fast-json",
+      "version": "2.4.0",
+      "supplier": "FastJSON Project",
+      "purl": "pkg:cargo/fast-json@2.4.0",
+      "posture": "allowed",
+      "category": "permissive",
+      "rule_applied": "licenses:MIT",
+      "explanation": "Licence expression 'MIT' resolved to posture 'allowed'. Governing rule(s): permissive via licenses:MIT.",
+      "licence": {
+        "raw": "MIT",
+        "source_field": "concluded",
+        "expression": "MIT",
+        "license_ids": [
+          "MIT"
+        ],
+        "exception_ids": [],
+        "unknown_ids": [],
+        "unresolved": false,
+        "unresolved_reason": null
+      },
+      "obligations": [
+        "Retain copyright notices and licence text for the component.",
+        "Reproduce attribution in your product's third-party notices."
+      ],
+      "findings": [
+        {
+          "license_id": "MIT",
+          "category": "permissive",
+          "posture": "allowed",
+          "rule_id": "licenses:MIT"
+        }
+      ],
+      "unresolved": false
+    }
+  ],
+  "unresolved": [
+    {
+      "name": "mystery-package",
+      "version": "0.1.0",
+      "reason": "Licence is NOASSERTION in the SBOM."
+    },
+    {
+      "name": "unlicensed-snippet",
+      "version": "0.0.3",
+      "reason": "No licence information was found for this component."
+    }
+  ],
+  "obligations": [
+    "Read the actual terms; confirm a distribution/redistribution grant covers your use.",
+    "Confirm any per-seat, field-of-use, or royalty conditions.",
+    "Assess linkage: dynamic vs static linking changes the obligations.",
+    "Provide the ability to relink or replace the library where the licence requires it (e.g. LGPL).",
+    "Make modifications to the covered files available where required (e.g. MPL-2.0, EPL-2.0).",
+    "Retain notices and provide the covered source for the component.",
+    "Determine the component's licence from upstream and record it; treat as blocked until known.",
+    "Conveying a proprietary binary that incorporates this component typically requires releasing the combined work's source under the same licence.",
+    "Do not ship unless the component is fully isolated (e.g. separate process) and counsel has confirmed no derivative-work combination, or an exception is recorded.",
+    "Retain copyright notices and licence text for the component.",
+    "Reproduce attribution in your product's third-party notices."
+  ],
+  "exceptions_applied": [
+    {
+      "component": "build-only-gpl-tool",
+      "version": "4.4.0",
+      "original_posture": "blocked",
+      "override_posture": "allowed",
+      "justification": "Used only as a build-time code generator. Its output is not a derivative of the tool, and the GPL tool binary is not distributed with the product, so the copyleft obligation is not triggered for the shipped artefact.",
+      "owner": "general.counsel@example.com",
+      "date": "2026-05-01"
+    }
+  ],
+  "notes": [],
+  "methodology": [
+    "Each component's licence is read from the SBOM. The concluded licence is preferred over the declared licence where both are present.",
+    "Licence strings are parsed as SPDX expressions, including AND, OR and WITH operators, using the SPDX licence list.",
+    "Each licence is mapped to a category and a ship-posture by the policy file. For a dual (OR) licence the least restrictive branch governs by default, because the distributor may elect it; for an AND every licence applies and the most restrictive governs.",
+    "Licences that are NOASSERTION, absent, or not recognised are never treated as acceptable by default. They are surfaced as unresolved or unknown and given the policy's conservative default posture.",
+    "Project exceptions, where supplied, are applied after classification and are listed with their justification, owner and date.",
+    "Every result records the policy rule that produced it, so each classification can be audited."
+  ],
+  "limitations": [
+    "This tool does not perform static or dynamic linkage analysis. Weak-copyleft obligations (for example LGPL or MPL) depend on how a component is linked, which must be assessed by a human.",
+    "It classifies licences; it does not read the full licence text or detect additional terms embedded in a component.",
+    "It is not a vulnerability scanner. Where the SBOM already contains vulnerability data it is surfaced for information only.",
+    "It does not assert compliance with the EU Cyber Resilience Act or any other regulation, and is not a certification. It is a readiness and analysis aid.",
+    "Its conclusions are only as good as the SBOM it is given. Components missing from the SBOM are invisible to it."
+  ],
+  "disclaimer": "This report is generated by automated tooling. It is not legal advice and does not create a lawyer-client relationship. The classifications are indicative only: they are produced by applying a configurable policy to the licence identifiers found in the supplied SBOM. They depend entirely on the policy in force and on the completeness and accuracy of that SBOM. They do not account for how each component is actually used, combined, linked or distributed in your product, and they do not constitute a determination that any component may or may not be shipped. Before making any distribution decision, the findings here must be reviewed by qualified legal counsel."
+}
